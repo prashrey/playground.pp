@@ -29,7 +29,7 @@ body {
 }
 
 button {
-  border: 3px solid var(--wdg-action);
+  border: 2px solid var(--wdg-action);
   color: var(--wdg-action);
   padding: 10px 20px;
   background-color: transparent;
@@ -63,6 +63,19 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.app-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 10px;
+}
+
+.app-desc {
+  margin: 10px 0 0 15px;
+}
+
+.main-app {
+  padding-bottom: 84px;
+}
 
 .main-grid {
   display: grid;
@@ -74,7 +87,7 @@ button:disabled {
 .main-grid .grid-item {
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid var(--wdg-action);
+  border: 1px solid var(--wdg-action);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -95,26 +108,49 @@ button:disabled {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-direction: column;
   gap: 20px;
 }
 
+.marketplace-container .storage-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .marketplace-container .materials-wrap {
-  padding: 0 20px;
+  width: 100%;
 }
 
 .marketplace-container .materials-wrap .material-list {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.marketplace-container .materials-wrap .material-list-title {
+  border-bottom: 1px solid var(--wdg-action);
+  margin: 0 0 10px;
+}
+
+.marketplace-container .materials-wrap .material-list-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .marketplace-container .materials-wrap .material-list li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 200px;
   padding: 0 0 0 10px;
-  border: 1px solid;
+  border: 1px solid var(--wdg-action);
   border-radius: 25px;
   margin-bottom: 5px;
+  flex: 1;
 }
 
 .marketplace-container .materials-wrap .material-name {
@@ -133,10 +169,15 @@ button:disabled {
 }
 
 footer {
+  background-color: var(--wdg-bg);
   display: block;
   width: 100%;
   position: fixed;
   bottom: 0;
+}
+
+footer button {
+  background-color: var(--main-bg);
 }
 
 

@@ -5,28 +5,25 @@ import Marketplace from "@/components/Marketplace";
 import Workshop from "@/components/Workshop";
 
 import { useGame } from "@/context/GameContext";
-import { UPGRADES, ECONOMY } from "@/helper/constants";
+import { UPGRADES } from "@/helper/constants";
 
 export default function Home() {
   const {
     gameStarted,
     setGameStarted,
     balance,
-    setBalance,
     loan,
     vacationFund,
     inventory,
-    setInventory,
     week,
     advanceWeek,
     drillLevel,
     upgradeDrill,
-    setDrillLevel,
     storageLevel,
-    setStorageLevel,
     upgradeStorage,
     getStorageCapacity,
     sellItems,
+    resetGame,
   } = useGame();
 
   const getDrillUpgradeCost = level => {
@@ -44,9 +41,9 @@ export default function Home() {
   };
 
   return (
-    <main className="p-8 font-mono">
-      <h1 className="text-3xl mb-4">The Myning Game</h1>
-      <p className="text-3xl mb-4" style={{ fontSize: "14px", margin: "10px 0 0 60px" }}>
+    <main className="main-app">
+      <h1 className="app-title">The Myning Game</h1>
+      <p className="app-desc">
         You are the only hope of your village. Overcome their loans and accumulate enough wealth to plan a vacation trip
         to Hawai for all of them
       </p>
@@ -101,7 +98,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <footer className="mt-8">
         {!gameStarted ? (
           <button
@@ -112,19 +108,7 @@ export default function Home() {
             Start Game
           </button>
         ) : (
-          <button
-            style={{ margin: "20px", width: "calc(100% - 40px)" }}
-            className="block rounded"
-            onClick={() => {
-              setBalance(ECONOMY.INITIAL_BALANCE);
-              setDrillLevel(1);
-              setStorageLevel(1);
-              // setLoan(ECONOMY.INITIAL_LOAN);
-              // setVacationFund(0);
-              setInventory({});
-              setGameStarted(false);
-            }}
-          >
+          <button style={{ margin: "20px", width: "calc(100% - 40px)" }} className="block rounded" onClick={resetGame}>
             Reset Game
           </button>
         )}

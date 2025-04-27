@@ -3,56 +3,57 @@ import { useGame } from "@/context/GameContext";
 import { UPGRADES } from "@/helper/constants";
 
 const Marketplace = props => {
-  const {
-    gameStarted,
-    balance,
-    inventory,
-    storageLevel,
-    upgradeStorage,
-    getStorageCapacity,
-    sellItems,
-    sellSingularItem,
-  } = useGame();
+  const { gameStarted, balance, inventory, storageLevel, upgradeStorage, sellItems, sellSingularItem } = useGame();
 
-  const { getStorageUpgradeCost } = props;
+  const { getStorageUpgradeCost, getStorageCapacity } = props;
 
   return (
     <div className="marketplace-container">
       <div className="storage-wrap">
-        <p>Storage Level: {storageLevel}</p>
-        {gameStarted && (
-          <button
-            onClick={upgradeStorage}
-            disabled={balance < getStorageUpgradeCost(storageLevel) || storageLevel >= UPGRADES.STORAGE.MAX_LEVEL}
-            className={`rounded ${balance < getStorageUpgradeCost(storageLevel) ? "up-storage" : "up-action-disabled"}`}
-          >
-            {getStorageUpgradeCost(storageLevel)
-              ? `Upgrade Storage (₹${getStorageUpgradeCost(storageLevel)})`
-              : "Max Storage"}
-          </button>
-        )}
+        <div className="object-wrap">
+          <h4 className="object-title">Storage Level: {storageLevel}</h4>
+          <div>
+            {gameStarted && (
+              <button
+                onClick={upgradeStorage}
+                disabled={balance < getStorageUpgradeCost(storageLevel) || storageLevel >= UPGRADES.STORAGE.MAX_LEVEL}
+                className={`block rounded ${
+                  balance < getStorageUpgradeCost(storageLevel) ? "up-storage" : "up-action-disabled"
+                }`}
+              >
+                {getStorageUpgradeCost(storageLevel)
+                  ? `Upgrade Storage (₹${getStorageUpgradeCost(storageLevel)})`
+                  : "Max Storage"}
+              </button>
+            )}
+          </div>
+        </div>
 
-        <p className="mt-4">
-          Items in storage: {Object.values(inventory).reduce((total, amount) => total + amount, 0)} /{" "}
-          {getStorageCapacity()}
-        </p>
-
-        {gameStarted && (
-          <button
-            onClick={sellItems}
-            disabled={Object.values(inventory).every(amount => amount === 0)}
-            className={`mt-2 px-4 py-2 rounded ${
-              Object.values(inventory).every(amount => amount === 0)
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-purple-700 text-white"
-            }`}
-          >
-            Sell All Items
-          </button>
-        )}
+        <div className="object-wrap">
+          <h4 className="object-title">
+            Items in storage: {Object.values(inventory).reduce((total, amount) => total + amount, 0)} /
+            {getStorageCapacity()}
+          </h4>
+          <div>
+            {gameStarted && (
+              <button
+                onClick={sellItems}
+                disabled={Object.values(inventory).every(amount => amount === 0)}
+                className={`block rounded ${
+                  Object.values(inventory).every(amount => amount === 0)
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-purple-700 text-white"
+                }`}
+              >
+                Sell All Items
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="materials-wrap">
+        <h2 className="material-list-title">Materials</h2>
         <ul className="material-list">
           {Object.entries(inventory).map(([material, amount]) => (
             <li key={material} className="flex justify-between">

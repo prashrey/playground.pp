@@ -60,6 +60,18 @@ export const GameProvider = ({ children }) => {
     return () => clearInterval(timer);
   }, [gameStarted, getStorageCapacity, getProductionRate]);
 
+  const resetGame = useCallback(() => {
+    setGameStarted(false);
+    setBalance(ECONOMY.INITIAL_BALANCE);
+    setLoan(ECONOMY.INITIAL_LOAN);
+    setVacationFund(0);
+    setInventory({});
+    setWeek(1);
+    setDrillLevel(1);
+    setStorageLevel(1);
+    setUpdatedStorageCapacity(ECONOMY.BASE_STORAGE_CAPACITY); // Reset storage capacity
+  }, []);
+
   // Weekly game progression handler
   const advanceWeek = useCallback(() => {
     if (!gameStarted || typeof week !== "number") return false;
@@ -208,6 +220,7 @@ export const GameProvider = ({ children }) => {
         getMaterialCost,
         sellItems,
         sellSingularItem,
+        resetGame,
       }}
     >
       {children}
