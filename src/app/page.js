@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <main className="p-8 font-mono">
-      <h1 className="text-3xl mb-4">⛏️ The Myning Game</h1>
+      <h1 className="text-3xl mb-4">The Myning Game</h1>
       <p className="text-3xl mb-4" style={{ fontSize: "14px", margin: "10px 0 0 60px" }}>
         You are the only hope of your village. Overcome their loans and accumulate enough wealth to plan a vacation trip
         to Hawai for all of them
@@ -53,7 +53,7 @@ export default function Home() {
       <section className="main-grid">
         <div className="grid-item">
           <div className="section-details">
-            <h2 className="grid-section-name">🏠 Home</h2>
+            <h2 className="grid-section-name">Home</h2>
             <p className="grid-dection-desc">Welcome to the Mining Game! Start your adventure now!</p>
           </div>
           <EconomyDetails
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
         <div className="grid-item">
           <div className="section-details">
-            <h2 className="grid-section-name">🛠️ Workshop</h2>
+            <h2 className="grid-section-name">Workshop</h2>
             <p className="grid-dection-desc">This is where it all goes down! </p>
           </div>
           <Workshop
@@ -80,7 +80,7 @@ export default function Home() {
         </div>
         <div className="grid-item">
           <div className="section-details">
-            <h2 className="grid-section-name">🛒 Marketplace</h2>
+            <h2 className="grid-section-name">Marketplace</h2>
             <p className="grid-dection-desc">Trade your resources and upgrade your equipment!</p>
           </div>
           <Marketplace
@@ -93,63 +93,13 @@ export default function Home() {
             getStorageCapacity={getStorageCapacity}
             sellItems={sellItems}
           />
-          {/* <p>📦 Storage Level: {storageLevel}</p>
-          {gameStarted && (
-            <>
-              <button
-                onClick={upgradeStorage}
-                disabled={balance < getStorageUpgradeCost(storageLevel) || storageLevel >= UPGRADES.STORAGE.MAX_LEVEL}
-                className={`rounded ${
-                  balance < getStorageUpgradeCost(storageLevel) ? "up-storage" : "up-action-disabled"
-                }`}
-              >
-                {getStorageUpgradeCost(storageLevel)
-                  ? `Upgrade Storage (₹${getStorageUpgradeCost(storageLevel)})`
-                  : "Max Storage"}
-              </button>
-            </>
-          )} */}
-          {/* <p className="mt-4">
-            🪨 Items in storage:{" "}
-            {Object.entries(inventory)
-              .map(([material, amount]) => amount)
-              .reduce((a, b) => a + b, 0)}
-            / {getStorageCapacity()}
-          </p> */}
-          {/* <ul className="mt-4">
-            {Object.entries(inventory).map(([material, amount]) => (
-              <li key={material} className="flex justify-between">
-                <span>{material.charAt(0).toUpperCase() + material.slice(1)}:</span>
-                <span>{amount}</span>
-              </li>
-            ))}
-          </ul> */}
-          {/* {gameStarted && (
-            <button
-              onClick={sellItems}
-              disabled={Object.values(inventory).every(amount => amount === 0)}
-              className={`mt-2 px-4 py-2 rounded ${
-                Object.values(inventory).every(amount => amount === 0)
-                  ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-purple-700 text-white"
-              }`}
-            >
-              Sell All Items
-            </button>
-          )} */}
         </div>
         <div className="grid-item">
           <div className="section-details">
-            <h2 className="grid-section-name">🏆 Achievements</h2>
+            <h2 className="grid-section-name">Achievements</h2>
             <p className="grid-dection-desc">Unlock achievements as you progress through the game!</p>
           </div>
         </div>
-        {/* <div className="grid-item">
-          <div className="section-details">
-          <h2 className="grid-section-name">⚙️ Settings</h2>
-          <p className="grid-dection-desc">Customize your game experience!</p>
-          </div>
-        </div> */}
       </section>
 
       <footer className="mt-8">

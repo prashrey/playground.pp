@@ -91,10 +91,6 @@ button:disabled {
   margin-bottom: 10px;
 }
 
-.main-grid .grid-item .section-details p {
-  margin-left: 40px;
-}
-
 .marketplace-container {
   display: flex;
   align-items: flex-start;
@@ -103,7 +99,6 @@ button:disabled {
 }
 
 .marketplace-container .materials-wrap {
-  /* border-left: 1px solid; */
   padding: 0 20px;
 }
 

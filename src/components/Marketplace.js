@@ -1,4 +1,5 @@
 import React from "react";
+import { useGame } from "@/context/GameContext";
 import { UPGRADES } from "@/helper/constants";
 
 const Marketplace = props => {
@@ -8,37 +9,34 @@ const Marketplace = props => {
     inventory,
     storageLevel,
     upgradeStorage,
-    getStorageUpgradeCost,
     getStorageCapacity,
     sellItems,
-  } = props;
+    sellSingularItem,
+  } = useGame();
+
+  const { getStorageUpgradeCost } = props;
+
   return (
     <div className="marketplace-container">
       <div className="storage-wrap">
-        <p>📦 Storage Level: {storageLevel}</p>
+        <p>Storage Level: {storageLevel}</p>
         {gameStarted && (
-          <>
-            <button
-              onClick={upgradeStorage}
-              disabled={balance < getStorageUpgradeCost(storageLevel) || storageLevel >= UPGRADES.STORAGE.MAX_LEVEL}
-              className={`rounded ${
-                balance < getStorageUpgradeCost(storageLevel) ? "up-storage" : "up-action-disabled"
-              }`}
-            >
-              {getStorageUpgradeCost(storageLevel)
-                ? `Upgrade Storage (₹${getStorageUpgradeCost(storageLevel)})`
-                : "Max Storage"}
-            </button>
-          </>
+          <button
+            onClick={upgradeStorage}
+            disabled={balance < getStorageUpgradeCost(storageLevel) || storageLevel >= UPGRADES.STORAGE.MAX_LEVEL}
+            className={`rounded ${balance < getStorageUpgradeCost(storageLevel) ? "up-storage" : "up-action-disabled"}`}
+          >
+            {getStorageUpgradeCost(storageLevel)
+              ? `Upgrade Storage (₹${getStorageUpgradeCost(storageLevel)})`
+              : "Max Storage"}
+          </button>
         )}
+
         <p className="mt-4">
-          🪨 Items in storage:
-          {Object.entries(inventory)
-            .map(([material, amount]) => amount)
-            .reduce((a, b) => a + b, 0)}
-          / {getStorageCapacity()}
-          {/* {inventory.iron} / {getStorageCapacity()} */}
+          Items in storage: {Object.values(inventory).reduce((total, amount) => total + amount, 0)} /{" "}
+          {getStorageCapacity()}
         </p>
+
         {gameStarted && (
           <button
             onClick={sellItems}
@@ -53,6 +51,7 @@ const Marketplace = props => {
           </button>
         )}
       </div>
+
       <div className="materials-wrap">
         <ul className="material-list">
           {Object.entries(inventory).map(([material, amount]) => (
@@ -60,7 +59,7 @@ const Marketplace = props => {
               <span className="material-name">{material.charAt(0).toUpperCase() + material.slice(1)}</span>
               <span>{amount}</span>
               <button
-                // onClick={() => sellItems(material)}
+                onClick={() => sellSingularItem(material)}
                 disabled={amount === 0}
                 className={`rounded sell-button ${amount === 0 ? "disabled" : ""}`}
               >

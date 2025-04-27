@@ -161,6 +161,26 @@ export const GameProvider = ({ children }) => {
     }
   };
 
+  const sellSingularItem = material => {
+    // Check if the material exists in the inventory
+    if (!inventory[material] || inventory[material] <= 0) return;
+
+    try {
+      const materialPrice = getMaterialCost(material);
+      const totalEarned = materialPrice * inventory[material];
+
+      // Update balance and remove the sold item from inventory
+      setBalance(prev => prev + totalEarned);
+      setInventory(prev => ({ ...prev, [material]: 0 })); // Set sold material amount to 0
+      console.log(`Total earnings: ${totalEarned} | Material: ${material} | Amount: ${inventory[material]}`);
+
+      return totalEarned; // Return total earned for UI feedback
+    } catch (error) {
+      console.error("Failed to sell singular item:", error);
+      return 0;
+    }
+  };
+
   console.log("Final Inventory: ", inventory);
   // Context provider setup
   return (
@@ -187,6 +207,7 @@ export const GameProvider = ({ children }) => {
         getStorageCapacity,
         getMaterialCost,
         sellItems,
+        sellSingularItem,
       }}
     >
       {children}
