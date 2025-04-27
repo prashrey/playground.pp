@@ -47,7 +47,7 @@ export default function Home() {
     <main className="p-8 font-mono">
       <h1 className="text-3xl mb-4">⛏️ The Myning Game</h1>
       <p className="text-3xl mb-4" style={{ fontSize: "14px", margin: "10px 0 0 60px" }}>
-        You're the only hope of your village. Overcome their loans and accumulate enough wealth to plan a vacation trip
+        You are the only hope of your village. Overcome their loans and accumulate enough wealth to plan a vacation trip
         to Hawai for all of them
       </p>
       <section className="main-grid">
